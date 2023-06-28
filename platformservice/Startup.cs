@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using platformservice.SyncDataServices.Http;
 using PlatformService.Data;
 
 namespace PlatformService
@@ -32,15 +33,21 @@ namespace PlatformService
 
         public void ConfigureServices(IServiceCollection services)
         {
-
+            if (_env.IsProduction())
+            {
+                Console.WriteLine("--> Using SqlServer Db");
+                services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("PlatformsConnection")));
+            }
+            else
+            {
                 Console.WriteLine("--> Using InMem Db");
                 services.AddDbContext<AppDbContext>(opt =>
                      opt.UseInMemoryDatabase("InMem"));
-            
+            }
 
             services.AddScoped<IPlatformRepo, PlatformRepo>();
 
-            //services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
+            services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
             //services.AddSingleton<IMessageBusClient, MessageBusClient>();
             //services.AddGrpc();
             services.AddControllers();
@@ -82,7 +89,7 @@ namespace PlatformService
             });
 
 
-            PrepDb.PrepPopulation(app);
+            PrepDb.PrepPopulation(app, env.IsProduction());
 
         }
     }

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platformservice", "platformservice\platformservice.csproj", "{30AE16AA-FD91-4A09-8D4D-BD7D07FD2CC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "platformservice", "platformservice\platformservice.csproj", "{30AE16AA-FD91-4A09-8D4D-BD7D07FD2CC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "commandservice", "commandservice\commandservice.csproj", "{0B9B5BEC-6A9F-46B9-B33E-79D4BBD68C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K8S", "K8S\K8S.csproj", "{589646C9-4EAA-40B2-A3B1-4487BE44EDA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{30AE16AA-FD91-4A09-8D4D-BD7D07FD2CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30AE16AA-FD91-4A09-8D4D-BD7D07FD2CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30AE16AA-FD91-4A09-8D4D-BD7D07FD2CC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B9B5BEC-6A9F-46B9-B33E-79D4BBD68C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B9B5BEC-6A9F-46B9-B33E-79D4BBD68C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B9B5BEC-6A9F-46B9-B33E-79D4BBD68C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B9B5BEC-6A9F-46B9-B33E-79D4BBD68C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{589646C9-4EAA-40B2-A3B1-4487BE44EDA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{589646C9-4EAA-40B2-A3B1-4487BE44EDA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{589646C9-4EAA-40B2-A3B1-4487BE44EDA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{589646C9-4EAA-40B2-A3B1-4487BE44EDA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
