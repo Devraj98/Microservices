@@ -38,5 +38,10 @@ namespace PlatformService.Data
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public void DeletePlatformById(Platform platform)
+        {
+             _context.Platforms.Remove(platform);
+        }
     }
 }
