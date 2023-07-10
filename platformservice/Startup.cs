@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using platformservice.AsyncDataServices;
+using platformservice.SyncDataServices.Grpc;
 using platformservice.SyncDataServices.Http;
 using PlatformService.Data;
 
@@ -48,8 +50,8 @@ namespace PlatformService
             services.AddScoped<IPlatformRepo, PlatformRepo>();
 
             services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
-            //services.AddSingleton<IMessageBusClient, MessageBusClient>();
-            //services.AddGrpc();
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
+            services.AddGrpc();
             services.AddControllers();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
@@ -80,12 +82,12 @@ namespace PlatformService
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapGrpcService<GrpcPlatformService>();
+                endpoints.MapGrpcService<GrpcPlatformService>();
 
-                //endpoints.MapGet("/protos/platforms.proto", async context =>
-                //{
-                //    await context.Response.WriteAsync(File.ReadAllText("Protos/platforms.proto"));
-                //});
+                endpoints.MapGet("/protos/platforms.proto", async context =>
+                {
+                    await context.Response.WriteAsync(File.ReadAllText("Protos/platforms.proto"));
+                });
             });
 
 

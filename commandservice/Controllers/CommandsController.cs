@@ -22,28 +22,38 @@ namespace commandservice.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<int> GetCommandsForPlatform(int platformId)
+        public  ActionResult < IEnumerable < CommandReadDto >> GetCommandsForPlatform(int platformId)
         {
-
-            //ActionResult < IEnumerable < CommandReadDto >>
-
-            foreach (var a in Enumerable.Range(0, 1000))
+            Console.WriteLine($"--> Hit GetCommandsForPlatform : {platformId}");
+            if (_repository.PlatformExists(platformId))
             {
-                Thread.Sleep(100);
-                Console.WriteLine($" Number : {a}");
-                yield return a;
+                var commands = _repository.GetCommandsForPlatform(platformId);
+                return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commands));
+            }
+            else
+            {
+                return NotFound("Platform Not Found");
+            }
+        }
+
+        [HttpGet("{commandId}", Name = "GetCommandForPlatform")]
+        public ActionResult<CommandReadDto> GetCommandForPlatform(int platformId, int commandId)
+        {
+            Console.WriteLine($"--> Hit GetCommandForPlatform: {platformId} / {commandId}");
+
+            if (!_repository.PlatformExists(platformId))
+            {
+                return NotFound();
             }
 
-            //Console.WriteLine($"--> Hit GetCommandsForPlatform : {platformId}");
-            //if(_repository.PlatformExists(platformId))
-            //{
-            //    var commands = _repository.GetCommandsForPlatform(platformId);
-            //    return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(commands));
-            //}
-            //else
-            //{
-            //    return NotFound("Platform Not Found");
-            //}
+            var command = _repository.GetCommand(platformId, commandId);
+
+            if (command == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<CommandReadDto>(command));
         }
 
         [HttpPost]
@@ -57,7 +67,7 @@ namespace commandservice.Controllers
                 _repository.SaveChanges();
                 
                 var commandReadDto = _mapper.Map<CommandReadDto>(command);
-                return CreatedAtRoute(nameof(GetCommandsForPlatform), new { platformId,commandReadDto.Id,commandReadDto });
+                return CreatedAtRoute(nameof(GetCommandForPlatform), new { platformId = platformId, commandId = commandReadDto.Id },commandReadDto );
             }
             else
             {
