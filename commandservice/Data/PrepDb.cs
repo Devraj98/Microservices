@@ -17,7 +17,7 @@ namespace commandservice.Data
 
         private static void SeedData(ICommandRepo repo, IEnumerable<Platform> platforms)
         {
-            Console.WriteLine("Seeding New Platforms....");
+            Console.WriteLine("Seeding New Platforms....>");
 
             foreach (var platform in platforms)
             {

@@ -39,7 +39,8 @@ namespace PlatformService.Data
                 context.Platforms.AddRange(
                     new Platform() {Name="Dot Net", Publisher="Microsoft", Cost="Free"},
                     new Platform() {Name="SQL Server Express", Publisher="Microsoft",  Cost="Free"},
-                    new Platform() {Name="Kubernetes", Publisher="Cloud Native Computing Foundation",  Cost="Free"}
+                    new Platform() {Name="Kubernetes", Publisher="Cloud Native Computing Foundation",  Cost="Free"},
+                    new Platform() { Name = "Docker", Publisher = "Cloud Native Computing Foundation", Cost = "Free" }
                 );
 
                 context.SaveChanges();
